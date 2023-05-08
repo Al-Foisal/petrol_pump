@@ -42,7 +42,8 @@
                     <div class="card-header">
                         Order Details
                     </div>
-                    <form action="" method="post">
+                    <form action="{{ route('saveOrder') }}" method="post">
+                        @csrf
                         <div class="card-body pos_order_details">
                             <div class="row">
                                 <div class="mb-4 row align-items-center">

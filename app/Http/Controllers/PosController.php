@@ -20,6 +20,7 @@ class PosController extends Controller {
     }
 
     public function saveOrder(Request $request) {
+        $data = [];
 
         if (count($request->product_id)) {
             return back();
@@ -53,6 +54,9 @@ class PosController extends Controller {
             ]);
         }
 
+        $data['order'] = $order->orderDetails->first();
+
+        return view('', $data);
     }
 
 }
