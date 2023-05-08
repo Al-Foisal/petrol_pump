@@ -20,15 +20,16 @@ class PosController extends Controller {
     }
 
     public function saveOrder(Request $request) {
+        foreach ($request->product_id as $key => $product_id) {
+        }
         $data = [];
 
-        if (count($request->product_id)) {
-            return back();
-        }
+        $last_order = Order::where('id', 'desc')->first();
 
         $vehicle      = Vehicle::find($request->vehicle_id);
         $vehicle_type = $vehicle->vehicle_type == 1 ? 'Nabil Paribahan' : 'Others';
         $order        = Order::create([
+            'invoice_no'                => 4,
             'vehicle_model'             => $vehicle->model,
             'vehicle_number'            => $vehicle->vehicle_number,
             'vehicle_supervisor_name'   => $vehicle->supervisor_name,
@@ -41,7 +42,7 @@ class PosController extends Controller {
 
         foreach ($request->product_id as $key => $product_id) {
             $product        = Product::find($product_id);
-            $updated_stock  = $product->stock - $request->quantity[$key];
+            $updated_stock  = $product->stock - $request->product_quantity[$key];
             $product->stock = $updated_stock > 0 ? $updated_stock : 0;
             $product->save();
 
@@ -54,9 +55,15 @@ class PosController extends Controller {
             ]);
         }
 
-        $data['order'] = $order->orderDetails->first();
+        $data['order'] = $order;
 
-        return view('', $data);
+        return view('invoice', $data);
+    }
+
+    public function invoice() {
+        $order = Order::find(2);
+
+        return view('invoice', compact('order'));
     }
 
 }

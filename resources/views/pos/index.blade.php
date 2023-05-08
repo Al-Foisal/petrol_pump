@@ -109,7 +109,7 @@
                                         <label>Total amount</label>
                                         <div>
                                             <input class="form-control" type="text" name="total_amount" id="total_amount"
-                                                value="0" disabled>
+                                                value="0" readonly>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -123,7 +123,7 @@
                                         <label>Changes amount</label>
                                         <div>
                                             <input class="form-control" type="text" name="changes_amount"
-                                                id="changes_amount" value="0" disabled>
+                                                id="changes_amount" value="0" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group mt-5">

@@ -3,20 +3,17 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-
+use App\Models\Product;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
-class StockController extends Controller
-{
+class StockController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $keyword = $request->get('search');
         $perPage = 25;
 
@@ -38,8 +35,7 @@ class StockController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
+    public function create() {
         return view('backend.stock.create');
     }
 
@@ -50,12 +46,15 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
-    {
-        
+    public function store(Request $request) {
+
         $requestData = $request->all();
-        
+
         Stock::create($requestData);
+
+        $product        = Product::find($requestData['product_id']);
+        $product->stock = $product->stock + $requestData['oil_amount'];
+        $product->save();
 
         return redirect('stock')->with('flash_message', 'Stock added!');
     }
@@ -67,8 +66,7 @@ class StockController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show($id)
-    {
+    public function show($id) {
         $stock = Stock::findOrFail($id);
 
         return view('backend.stock.show', compact('stock'));
@@ -81,8 +79,7 @@ class StockController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $stock = Stock::findOrFail($id);
 
         return view('backend.stock.edit', compact('stock'));
@@ -96,11 +93,10 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(Request $request, $id)
-    {
-        
+    public function update(Request $request, $id) {
+
         $requestData = $request->all();
-        
+
         $stock = Stock::findOrFail($id);
         $stock->update($requestData);
 
@@ -114,10 +110,10 @@ class StockController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Stock::destroy($id);
 
         return redirect('stock')->with('flash_message', 'Stock deleted!');
     }
+
 }

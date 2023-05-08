@@ -43,4 +43,5 @@ Route::group(['middleware' => ['auth']], function () {
     //ajax request
     Route::get('/get-vehicle-details/{vehicle_type}', [AjaxRequestController::class, 'getVehicleDetails']);
     Route::get('/get-product-details/{id}', [AjaxRequestController::class, 'getProductDetails']);
+    Route::get('/invoice', [PosController::class, 'invoice'])->name('invoice');
 });
