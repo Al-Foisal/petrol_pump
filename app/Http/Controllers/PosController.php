@@ -20,16 +20,21 @@ class PosController extends Controller {
     }
 
     public function saveOrder(Request $request) {
-        foreach ($request->product_id as $key => $product_id) {
-        }
+
         $data = [];
 
-        $last_order = Order::where('id', 'desc')->first();
+        $last_order = Order::orderBy('id', 'desc')->first();
+
+        if ($last_order) {
+            $invoice = $last_order->invoice_no + 1;
+        } else {
+            $invoice = 1;
+        }
 
         $vehicle      = Vehicle::find($request->vehicle_id);
         $vehicle_type = $vehicle->vehicle_type == 1 ? 'Nabil Paribahan' : 'Others';
         $order        = Order::create([
-            'invoice_no'                => 4,
+            'invoice_no'                => $invoice,
             'vehicle_model'             => $vehicle->model,
             'vehicle_number'            => $vehicle->vehicle_number,
             'vehicle_supervisor_name'   => $vehicle->supervisor_name,
@@ -64,6 +69,13 @@ class PosController extends Controller {
         $order = Order::find(2);
 
         return view('invoice', compact('order'));
+    }
+
+    public function sellingHistory() {
+        $data            = [];
+        $data['history'] = Order::orderBy('id', 'desc')->paginate(10);
+
+        return view('selling-history', $data);
     }
 
 }

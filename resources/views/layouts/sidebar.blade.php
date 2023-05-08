@@ -93,6 +93,12 @@
                             <span>Pos</span>
                         </a>
                     </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('sellingHistory') }}">
+                            <i class="ri-price-tag-3-line"></i>
+                            <span>Selling History</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
