@@ -32,8 +32,9 @@
                                     <th>#</th>
                                     <th>Product</th>
                                     <th>Tank</th>
-                                    <th>Oil Amount</th>
+                                    <th>Fuel Amount</th>
                                     <th>Refile Date</th>
+                                    <th>Vehicle Number</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -45,6 +46,7 @@
                                             <td>{{ (isset($item->tankInfo)) ? $item->tankInfo->name : '' }}</td>
                                             <td>{{ $item->oil_amount }}</td>
                                             <td>{{ date('d-M-Y', strtotime($item->date)) }}</td>
+                                            <td>{{ $item->vehicle_number }}</td>
                                             <td>
 
                                                 <a href="{{ url('/stock/' . $item->id . '/edit') }}" title="Edit Stock">

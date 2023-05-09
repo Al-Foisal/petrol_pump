@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
-{
+class Stock extends Model {
     /**
      * The database table used by the model.
      *
@@ -25,15 +24,13 @@ class Stock extends Model
      *
      * @var array
      */
-    protected $fillable = ['product_id', 'tank_id', 'oil_amount', 'date'];
+    protected $fillable = ['product_id', 'tank_id', 'oil_amount', 'date', 'vehicle_number'];
 
-    public function tankInfo()
-    {
+    public function tankInfo() {
         return $this->hasOne(Tank::class, 'id', 'tank_id');
     }
 
-    public function productInfo()
-    {
+    public function productInfo() {
         return $this->hasOne(Product::class, 'id', 'product_id');
     }
 }

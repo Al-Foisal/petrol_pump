@@ -27,7 +27,8 @@
                                 <th>No</th>
                                 <th>Image</th>
                                 <th>Name</th>
-                                <th>Price</th>
+                                <th>Unit Price</th>
+                                <th>Fuel Amount</th>
                                 <th>Status</th>
                                 <th width="280px">Action</th>
                             </tr>
@@ -39,11 +40,13 @@
                                     </td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
-                                    <td>{{ ($product->status == 1) ? 'Active' : 'Inactive' }}</td>
+                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ $product->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
-                                        <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
                                             @can('product-edit')
-                                                <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                                                <a class="btn btn-primary"
+                                                    href="{{ route('products.edit', $product->id) }}">Edit</a>
                                             @endcan
 
 
@@ -64,7 +67,4 @@
     </div>
 
     {!! $products->links() !!}
-
-
-
 @endsection

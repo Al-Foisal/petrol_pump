@@ -47,7 +47,7 @@ class StockController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request) {
-
+        // dd($request->all());
         $requestData = $request->all();
 
         Stock::create($requestData);
