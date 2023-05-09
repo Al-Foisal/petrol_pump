@@ -61,7 +61,7 @@
                                 <a href="{{ route('stock.index') }}">Add Stock</a>
                             </li>
                             <li>
-                                <a href="#">Tank Wise Stock </a>
+                                <a href="{{ route('tankWiseStock') }}">Tank Wise Stock </a>
                             </li>
                             <li>
                                 <a href="#">Low Stock Alert</a>
