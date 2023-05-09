@@ -3,7 +3,7 @@
     <div id="sidebarEffect"></div>
     <div>
         <div class="logo-wrapper logo-wrapper-center">
-            <a href="#" data-bs-original-title="" title="">
+            <a href="{{ route('dashboard') }}" data-bs-original-title="" title="">
                 <img class="img-fluid for-white" src="{{ asset('assets/images/logo/full-white.png') }}" alt="logo">
             </a>
             <div class="back-btn">
@@ -30,7 +30,7 @@
                     <li class="back-btn"></li>
 
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="#">
+                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('dashboard') }}">
                             <i class="ri-home-line"></i>
                             <span>Dashboard</span>
                         </a>
@@ -77,6 +77,9 @@
                             </li>
                             <li>
                                 <a href="{{ route('users.index') }}">Users</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('vat') }}">Vat</a>
                             </li>
                         </ul>
                     </li>

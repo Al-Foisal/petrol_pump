@@ -20,4 +20,10 @@ class AjaxRequestController extends Controller {
 
         return view('pos.product-details', compact('single_product', 'pp'));
     }
+
+    public function getSingleProductDetails($id) {
+        $single_product = Product::find($id);
+
+        return $single_product;
+    }
 }

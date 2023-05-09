@@ -38,11 +38,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('vehicle', VehicleController::class);
 
     Route::get('sell/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::get('create-vat', [PosController::class, 'createVat'])->name('vat');
+    Route::post('vat-store-update', [PosController::class, 'vatStoreUpdate'])->name('vatStoreUpdate');
     Route::post('/save-order', [PosController::class, 'saveOrder'])->name('saveOrder');
+    Route::get('/dashboard', [PosController::class, 'dashboard'])->name('dashboard');
 
     //ajax request
     Route::get('/get-vehicle-details/{vehicle_type}', [AjaxRequestController::class, 'getVehicleDetails']);
     Route::get('/get-product-details/{id}', [AjaxRequestController::class, 'getProductDetails']);
+    Route::get('/get-single-product-details/{id}', [AjaxRequestController::class, 'getSingleProductDetails']);
     Route::get('/invoice', [PosController::class, 'invoice'])->name('invoice');
     Route::get('/selling-history', [PosController::class, 'sellingHistory'])->name('sellingHistory');
 });

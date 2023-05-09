@@ -5,10 +5,50 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\Vat;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class PosController extends Controller {
+    public function dashboard() {
+        $data            = [];
+        $todays_sell     = Order::whereDate('created_at', today())->get();
+        $todays_quantity = 0;
+        $todays_amount   = 0;
+
+        foreach ($todays_sell as $sell) {
+            $todays_amount += $sell->total_amount;
+
+            foreach ($sell->orderDetails as $details) {
+                $todays_quantity += $details->product_quantity;
+            }
+
+        }
+
+        $data['todays_quantity'] = $todays_quantity;
+        $data['todays_amount']   = $todays_amount;
+
+        $total_sell     = Order::all();
+        $total_quantity = 0;
+        $total_amount   = 0;
+
+        foreach ($total_sell as $sell) {
+            $total_amount += $sell->total_amount;
+
+            foreach ($sell->orderDetails as $details) {
+                $total_quantity += $details->product_quantity;
+            }
+
+        }
+
+        $data['total_quantity'] = $total_quantity;
+        $data['total_amount']   = $total_amount;
+
+        $data['products'] = Product::all();
+
+        return view('home', $data);
+    }
+
     public function index() {
         $data             = [];
         $data['products'] = $products = Product::where('status', 1)
@@ -57,6 +97,7 @@ class PosController extends Controller {
                 'product_quantity' => $request->product_quantity[$key],
                 'product_amount'   => $request->product_amount[$key],
                 'unit_price'       => $product->price,
+                'product_id'       => $request->product_id[$key],
             ]);
         }
 
@@ -76,6 +117,25 @@ class PosController extends Controller {
         $data['history'] = Order::orderBy('id', 'desc')->paginate(10);
 
         return view('selling-history', $data);
+    }
+
+    public function createVat() {
+        $vat = Vat::find(1);
+
+        return view('vat', compact('vat'));
+    }
+
+    public function vatStoreUpdate(Request $request) {
+        Vat::updateOrCreate(
+            [
+                'id' => 1,
+            ],
+            [
+                'vat'    => $request->vat,
+                'status' => $request->status,
+            ]);
+
+        return back()->withToastSuccess('Vat updated successfully!!');
     }
 
 }

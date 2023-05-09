@@ -72,7 +72,8 @@
                                         <label for="">Customer</label>
                                         <select class="js-example-basic-single w-100" name="vehicle_id">
                                             @foreach ($nabil as $n_item)
-                                                <option value="{{ $n_item->id }}">
+                                                <option value="{{ $n_item->id }}"
+                                                    @if ($n_item->type == 1) {{ 'selected' }} @endif>
                                                     {{ $n_item->vehicle_number }}({{ $n_item->supervisor_name ?? 'Not set yet' }})
                                                 </option>
                                             @endforeach
@@ -168,19 +169,40 @@
             });
         });
 
+        const arr = [];
+
         function getProductDetails(e, product_id) {
             if (product_id) {
-                $.ajax({
-                    url: "{{ url('get-product-details/') }}/" +
-                        product_id,
-                    type: "GET",
-                    dataType: "html",
-                    success: function(data) {
-                        $("#addProductDetails").append(data);
-                        getTotalSummation();
+                if (arr.includes(product_id) == true) {
+                    $.ajax({
+                        url: "{{ url('get-single-product-details/') }}/" +
+                            product_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            console.log(data);
+                            var present_quantity = $("#product_quantity_" + product_id).val();
+                            var present_amount = $("#product_amount_" + product_id).val();
+                            $("#product_quantity_" + product_id).val(Number(present_quantity) + 1);
+                            $("#product_amount_" + product_id).val(Number(present_amount) + Number(data.price));
+                            getTotalSummation();
+                        },
+                    });
+                } else {
+                    arr.push(product_id);
 
-                    },
-                });
+                    $.ajax({
+                        url: "{{ url('get-product-details/') }}/" +
+                            product_id,
+                        type: "GET",
+                        dataType: "html",
+                        success: function(data) {
+                            $("#addProductDetails").append(data);
+                            getTotalSummation();
+
+                        },
+                    });
+                }
             } else {
                 alert('danger');
             }
