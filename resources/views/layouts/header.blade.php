@@ -19,10 +19,7 @@
         <div class="nav-right col-6 pull-right right-header p-0">
             <ul class="nav-menus">
                 <li>
-                    <select class="js-example-basic-single w-100" name="state">
-                        <option value="Bangla">Bangla</option>
-                        <option value="English">English</option>
-                    </select>
+                    <a href="{{ route('pos.index') }}" class="btn header-pos-button">POS</a>
                 </li>
                 <li>
                     <div class="mode">
@@ -38,30 +35,7 @@
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li>
-                            <a href="all-users.html">
-                                <i data-feather="users"></i>
-                                <span>Users</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="order-list.html">
-                                <i data-feather="archive"></i>
-                                <span>Orders</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="support-ticket.html">
-                                <i data-feather="phone"></i>
-                                <span>Spports Tickets</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="profile-setting.html">
-                                <i data-feather="settings"></i>
-                                <span>Settings</span>
-                            </a>
-                        </li>
+                        
                         <li>
                             <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                href="javascript:void(0)">

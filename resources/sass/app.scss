@@ -161,7 +161,7 @@ p{
   //float: left;
 	height: 60px;
 	width: 60px;
-	background: url(https://www.pngarts.com/files/3/Letter-N-PNG-Download-Image.png) no-repeat;
+	background: url(../../public/logo.png) no-repeat;
 	background-size: 60px 60px;
 }
 .clientlogo{
@@ -204,4 +204,18 @@ td{
 
   
   
+}
+
+.header-pos-button{
+  background-color: #029488;
+color: white;
+font-weight: bold;
+}
+
+.page-wrapper .page-header .header-wrapper .nav-right .profile-dropdown {
+  width: 150px;
+  top: 57px;
+  right: -12px;
+  padding: 0 10px;
+  font-size: 14px;
 }
