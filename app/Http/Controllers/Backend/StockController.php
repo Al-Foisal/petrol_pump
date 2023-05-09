@@ -14,21 +14,19 @@ class StockController extends Controller {
      *
      * @return \Illuminate\View\View
      */
-    public function index(Request $request) {
-        $keyword = $request->get('search');
-        $perPage = 25;
+    public function index() {
+        $tanks = Tank::where('status', 1)->get();
+        $stock = Stock::orderBy('id', 'desc');
 
-        if (!empty($keyword)) {
-            $stock = Stock::where('product_id', 'LIKE', "%$keyword%")
-                ->orWhere('tank_id', 'LIKE', "%$keyword%")
-                ->orWhere('oil_amount', 'LIKE', "%$keyword%")
-                ->orWhere('date', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
-        } else {
-            $stock = Stock::latest()->paginate($perPage);
+        if (request()->tank_id && request()->date_from && request()->date_to) {
+            $stock = $stock->where('tank_id', request()->tank_id)
+                ->where('date', '>=', request()->date_from)
+                ->where('date', '<=', request()->date_to);
         }
 
-        return view('backend.stock.index', compact('stock'));
+        $stock = $stock->paginate(100);
+
+        return view('backend.stock.index', compact('stock', 'tanks'));
     }
 
     /**
@@ -135,11 +133,9 @@ class StockController extends Controller {
     }
 
     public function lowStockAlert() {
+        $data = Product::where('stock', '<', 100)->get();
 
-    }
-
-    public function stockReport() {
-
+        return view('stock-report.low-stock-alert', compact('data'));
     }
 
 }

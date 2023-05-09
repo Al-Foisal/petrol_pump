@@ -40,7 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     //stock history
     Route::get('/tank-wise-stock', [StockController::class, 'tankWiseStock'])->name('tankWiseStock');
     Route::get('/low-stock-alert', [StockController::class, 'lowStockAlert'])->name('lowStockAlert');
-    Route::get('/stock-report', [StockController::class, 'stockReport'])->name('stockReport');
 
     Route::get('sell/pos', [PosController::class, 'index'])->name('pos.index');
     Route::get('create-vat', [PosController::class, 'createVat'])->name('vat');

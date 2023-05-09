@@ -1,10 +1,15 @@
 <!-- Page Sidebar Start-->
+<style>
+    .simplebar-mask {
+        top: 7rem;
+    }
+</style>
 <div class="sidebar-wrapper">
     <div id="sidebarEffect"></div>
     <div>
         <div class="logo-wrapper logo-wrapper-center">
             <a href="{{ route('dashboard') }}" data-bs-original-title="" title="">
-                <img class="img-fluid for-white" src="{{ asset('assets/images/logo/full-white.png') }}" alt="logo">
+                <img class="img-fluid for-white" src="{{ asset('/logo.png') }}" alt="logo">
             </a>
             <div class="back-btn">
                 <i class="fa fa-angle-left"></i>
@@ -15,9 +20,10 @@
         </div>
         <div class="logo-icon-wrapper">
             <a href="#">
-                <img class="img-fluid main-logo main-white" src="{{ asset('assets/images/logo/logo.png') }}" alt="logo">
+                <img class="img-fluid main-logo main-white" src="{{ asset('assets/images/logo/logo.png') }}"
+                    alt="logo">
                 <img class="img-fluid main-logo main-dark" src="{{ asset('assets/images/logo/logo-white.png') }}"
-                     alt="logo">
+                    alt="logo">
             </a>
         </div>
         <nav class="sidebar-main">
@@ -64,11 +70,9 @@
                                 <a href="{{ route('tankWiseStock') }}">Tank Wise Stock </a>
                             </li>
                             <li>
-                                <a href="#">Low Stock Alert</a>
+                                <a href="{{ route('lowStockAlert') }}">Low Stock Alert</a>
                             </li>
-                            <li>
-                                <a href="#">Stock Report</a>
-                            </li>
+                            
                         </ul>
                     </li>
 
