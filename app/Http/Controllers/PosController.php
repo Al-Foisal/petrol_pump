@@ -6,7 +6,6 @@ use App\Models\Group;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
-use App\Models\Tank;
 use App\Models\Vat;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -107,7 +106,7 @@ class PosController extends Controller {
         if ($vehicle->vehicle_type == 1) {
             $group_id = null;
         } else {
-            $group_id = $vehicle->vehicle_type;
+            $group_id = $vehicle->group_id;
         }
 
         $order = Order::create([
@@ -175,9 +174,27 @@ class PosController extends Controller {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
         }
 
-        $data = $data->paginate(100);
+        if (request()->company_name) {
+            $data = $data->orWhere('vehicle_type', request()->company_name)->orWhere('group_id', request()->company_name);
+        }
 
-        return view('sell.selling-history', compact('data'));
+        if (request()->product_id) {
+            $p_id = request()->product_id;
+            $data = $data->with([
+                'orderDetails' => function ($query) use ($p_id) {
+                    return $query->where('product_id', $p_id);
+                },
+
+            ])->paginate(100);
+
+        } else {
+            $data = $data->with('orderDetails')->paginate(100);
+        }
+
+        $group   = Group::all();
+        $product = Product::all();
+
+        return view('sell.selling-history', compact('data', 'group', 'product'));
     }
 
     public function nabilSell() {
@@ -187,23 +204,55 @@ class PosController extends Controller {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
         }
 
-        $data = $data->paginate(100);
+        if (request()->product_id) {
+            $p_id = request()->product_id;
+            $data = $data->with([
+                'orderDetails' => function ($query) use ($p_id) {
+                    return $query->where('product_id', $p_id);
+                },
 
-        return view('sell.nabil-sell', compact('data'));
+            ])->paginate(100);
+
+        } else {
+            $data = $data->with('orderDetails')->paginate(100);
+        }
+
+        $product = Product::all();
+
+        return view('sell.nabil-sell', compact('data', 'product'));
     }
 
     public function otherSell() {
-        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 'Others');
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', '!==', 'Nabil Paribahan');
 
         if (request()->date_from && request()->date_to) {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
         }
 
-        $data = $data->paginate(100);
+        if (request()->company_name) {
+            $data = $data->orWhere('vehicle_type', request()->company_name)->orWhere('group_id', request()->company_name);
 
-        return view('sell.other-sell', compact('data'));
+        }
+
+// dd(request()->product_id);
+
+        if (request()->product_id) {
+            $p_id = request()->product_id;
+            $data = $data->with([
+                'orderDetails' => function ($query) use ($p_id) {
+                    return $query->where('product_id', $p_id);
+                },
+
+            ])->paginate(100);
+
+        } else {
+            $data = $data->with('orderDetails')->paginate(100);
+        }
+
+        $group   = Group::all();
+        $product = Product::all();
+
+        return view('sell.other-sell', compact('data', 'group', 'product'));
     }
-
-    
 
 }

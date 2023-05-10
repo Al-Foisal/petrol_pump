@@ -69,7 +69,7 @@
                                             <select class="js-example-basic-single w-100" name="group_id">
                                                 <option>Select group</option>
                                                 @foreach ($groups as $n_item)
-                                                    <option value="{{ $n_item->id }}">
+                                                    <option value="{{ $n_item->name }}">
                                                         {{ $n_item->name }}
                                                     </option>
                                                 @endforeach
