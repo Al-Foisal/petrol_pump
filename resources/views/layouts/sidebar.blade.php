@@ -11,7 +11,7 @@
             <a href="{{ route('dashboard') }}" data-bs-original-title="" title="">
                 <img class="img-fluid for-white" src="{{ asset('/logo.png') }}" alt="logo">
             </a>
-            
+
         </div>
         <div class="logo-icon-wrapper">
             <a href="#">
@@ -67,32 +67,16 @@
                             <li>
                                 <a href="{{ route('lowStockAlert') }}">Low Stock Alert</a>
                             </li>
-                            
+
                         </ul>
                     </li>
 
-                    <li class="sidebar-list">
-                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-list-check"></i>
-                            <span>Settings</span>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li>
-                                <a href="{{ route('roles.index') }}">Roles</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('users.index') }}">Users</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('vat') }}">Vat</a>
-                            </li>
-                        </ul>
-                    </li>
+
 
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('vehicle.index') }}">
                             <i class="ri-list-check"></i>
-                            <span>Vehicle Management</span>
+                            <span>Vehicle</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
@@ -115,6 +99,23 @@
                             </li>
                             <li>
                                 <a href="{{ route('otherSell') }}">Others</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-list-check"></i>
+                            <span>Settings</span>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('roles.index') }}">Roles</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}">Users</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('vat') }}">Vat</a>
                             </li>
                         </ul>
                     </li>

@@ -43,6 +43,22 @@ class PosController extends Controller {
 
         $data['total_quantity'] = $total_quantity;
         $data['total_amount']   = $total_amount;
+        $this_month             = Order::whereYear('created_at', date("Y"))->whereMonth('created_at', date("m"))->get();
+
+        $this_month_amount   = 0;
+        $this_month_quantity = 0;
+
+        foreach ($this_month as $sell) {
+            $this_month_amount += $sell->total_amount;
+
+            foreach ($sell->orderDetails as $details) {
+                $this_month_quantity += $details->product_quantity;
+            }
+
+        }
+
+        $data['this_month_amount']   = $this_month_amount;
+        $data['this_month_quantity'] = $this_month_quantity;
 
         $data['products'] = Product::all();
 
@@ -60,6 +76,17 @@ class PosController extends Controller {
     }
 
     public function saveOrder(Request $request) {
+
+        foreach ($request->product_id as $key => $product_id) {
+            $product = Product::find($product_id);
+
+            if ($product->stock > $request->product_quantity[$key]) {
+                continue;
+            } else {
+                return back()->withToastError('Insufficient stock for - ' . $product->name);
+            }
+
+        }
 
         $data = [];
 
