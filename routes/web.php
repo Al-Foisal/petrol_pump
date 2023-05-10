@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AjaxRequestController;
 use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\TankController;
 use App\Http\Controllers\Backend\VehicleController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
@@ -36,10 +37,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('tank', TankController::class);
     Route::resource('stock', StockController::class);
     Route::resource('vehicle', VehicleController::class);
+    Route::resource('group', GroupController::class);
 
     //stock history
     Route::get('/tank-wise-stock', [StockController::class, 'tankWiseStock'])->name('tankWiseStock');
     Route::get('/low-stock-alert', [StockController::class, 'lowStockAlert'])->name('lowStockAlert');
+    // Route::get('/current-stock', [StockController::class, 'currentStock'])->name('currentStock');
 
     Route::get('sell/pos', [PosController::class, 'index'])->name('pos.index');
     Route::get('create-vat', [PosController::class, 'createVat'])->name('vat');

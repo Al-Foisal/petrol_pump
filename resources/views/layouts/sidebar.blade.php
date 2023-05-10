@@ -117,6 +117,9 @@
                             <li>
                                 <a href="{{ route('vat') }}">Vat</a>
                             </li>
+                            <li>
+                                <a href="{{ route('group.index') }}">Group</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

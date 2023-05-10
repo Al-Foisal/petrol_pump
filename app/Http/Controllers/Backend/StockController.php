@@ -138,4 +138,6 @@ class StockController extends Controller {
         return view('stock-report.low-stock-alert', compact('data'));
     }
 
+    
+
 }

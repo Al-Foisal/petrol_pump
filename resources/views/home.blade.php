@@ -77,9 +77,9 @@
                     <div class="custome-1-bg b-r-4 card-body">
                         <div class="media align-items-center static-top-widget">
                             <div class="media-body p-0">
-                                <span class="m-0">{{ date("F") }} Sell Quantity(L)</span>
+                                <span class="m-0">Monthly Sell Quantity(L) - ({{ date("F") }})</span>
                                 <h4 class="mb-0 counter">
-                                    ৳{{ number_format($this_month_quantity, 2) }}
+                                    {{ number_format($this_month_quantity, 2) }}
                                 </h4>
                             </div>
                             <div class="align-self-center text-center">
@@ -94,7 +94,7 @@
                     <div class="custome-1-bg b-r-4 card-body">
                         <div class="media align-items-center static-top-widget">
                             <div class="media-body p-0">
-                                <span class="m-0">{{ date("F") }} Sell Amount</span>
+                                <span class="m-0">Monthly Sell Amount - ({{ date("F") }})</span>
                                 <h4 class="mb-0 counter">
                                     ৳{{ number_format($this_month_amount, 2) }}
                                 </h4>
