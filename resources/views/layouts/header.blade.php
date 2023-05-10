@@ -28,17 +28,24 @@
                 </li>
                 <li class="profile-nav onhover-dropdown pe-0 me-0">
                     <div class="media profile-media">
-                        <img class="user-profile rounded-circle" src="{{ asset('assets/images/users/4.jpg') }}" alt="">
+                        <img class="user-profile rounded-circle" src="{{ asset('assets/images/users/4.jpg') }}"
+                            alt="">
                         <div class="user-name-hide media-body">
-                            <span>Emay Walter</span>
-                            <p class="mb-0 font-roboto">Admin<i class="middle ri-arrow-down-s-line"></i></p>
+                            <span>{{ auth()->user()->name }}</span>
+                            <p class="mb-0 font-roboto">
+                                @if (!empty(auth()->user()->getRoleNames()))
+                                    @foreach (auth()->user()->getRoleNames() as $v)
+                                        {{ $v }}
+                                    @endforeach
+                                @endif
+                                <i class="middle ri-arrow-down-s-line"></i>
+                            </p>
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        
+
                         <li>
-                            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                               href="javascript:void(0)">
+                            <a href="{{ route('logout') }}">
                                 <i data-feather="log-out"></i>
                                 <span>Log out</span>
                             </a>

@@ -11,12 +11,7 @@
             <a href="{{ route('dashboard') }}" data-bs-original-title="" title="">
                 <img class="img-fluid for-white" src="{{ asset('/logo.png') }}" alt="logo">
             </a>
-            <div class="back-btn">
-                <i class="fa fa-angle-left"></i>
-            </div>
-            <div class="toggle-sidebar">
-                <i class="ri-apps-line status_toggle middle sidebar-toggle"></i>
-            </div>
+            
         </div>
         <div class="logo-icon-wrapper">
             <a href="#">
@@ -44,7 +39,7 @@
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-store-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Product</span>
                         </a>
                         <ul class="sidebar-submenu">
@@ -59,7 +54,7 @@
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-store-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Stock</span>
                         </a>
                         <ul class="sidebar-submenu">
@@ -78,7 +73,7 @@
 
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-store-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Settings</span>
                         </a>
                         <ul class="sidebar-submenu">
@@ -96,19 +91,19 @@
 
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('vehicle.index') }}">
-                            <i class="ri-price-tag-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Vehicle Management</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a class="sidebar-link sidebar-title link-nav" href="{{ route('pos.index') }}">
-                            <i class="ri-price-tag-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Pos</span>
                         </a>
                     </li>
                     <li class="sidebar-list">
                         <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-                            <i class="ri-store-3-line"></i>
+                            <i class="ri-list-check"></i>
                             <span>Sell</span>
                         </a>
                         <ul class="sidebar-submenu">

@@ -55,4 +55,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/selling-history', [PosController::class, 'sellingHistory'])->name('sellingHistory');
     Route::get('/nabil-sell', [PosController::class, 'nabilSell'])->name('nabilSell');
     Route::get('/other-sell', [PosController::class, 'otherSell'])->name('otherSell');
+
+    Route::get('lgoout', function () {
+        auth()->logout();
+
+        return to_route('login');
+    })->name('logout');
 });
