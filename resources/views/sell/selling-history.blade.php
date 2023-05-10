@@ -69,7 +69,9 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->invoice_no }}</td>
                                                 <td>
-                                                    <b>V.Model: </b>{{ $item->vehicle_model }},<br>
+                                                    @if ($item->vehicle_model)
+                                                        <b>V.Model: </b>{{ $item->vehicle_model }},<br>
+                                                    @endif
                                                     <b>V.Number: </b>{{ $item->vehicle_number }},<br>
                                                     <b>V.Type:</b> {{ $item->vehicle_type }},<br>
                                                     @if ($item->vehicle_supervisor_name)
@@ -77,6 +79,9 @@
                                                     @endif
                                                     @if ($item->vehicle_supervisor_mobile)
                                                         <b>S.Mobile: </b>{{ $item->vehicle_supervisor_mobile }}
+                                                    @endif
+                                                    @if ($item->group_id)
+                                                        <b>Group: </b>{{ $item->group->name }}
                                                     @endif
                                                 </td>
                                                 <td>৳{{ number_format($item->total_amount, 2) }}</td>

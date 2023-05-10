@@ -180,7 +180,7 @@ class PosController extends Controller {
     }
 
     public function nabilSell() {
-        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 1);
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 'Nabil Paribahan');
 
         if (request()->date_from && request()->date_to) {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
@@ -192,7 +192,7 @@ class PosController extends Controller {
     }
 
     public function otherSell() {
-        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 2);
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 'Others');
 
         if (request()->date_from && request()->date_to) {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);

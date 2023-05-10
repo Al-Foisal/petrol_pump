@@ -69,7 +69,9 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->invoice_no }}</td>
                                                 <td>
-                                                    <b>V.Model: </b>{{ $item->vehicle_model }},<br>
+                                                    @if ($item->vehicle_model)
+                                                        <b>V.Model: </b>{{ $item->vehicle_model }},<br>
+                                                    @endif
                                                     <b>V.Number: </b>{{ $item->vehicle_number }},<br>
                                                     @if ($item->vehicle_supervisor_name)
                                                         <b>S.Name: </b>{{ $item->vehicle_supervisor_name }},<br>
