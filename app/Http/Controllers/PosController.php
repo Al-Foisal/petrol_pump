@@ -112,13 +112,6 @@ class PosController extends Controller {
         return view('invoice', compact('order'));
     }
 
-    public function sellingHistory() {
-        $data            = [];
-        $data['history'] = Order::orderBy('id', 'desc')->paginate(10);
-
-        return view('selling-history', $data);
-    }
-
     public function createVat() {
         $vat = Vat::find(1);
 
@@ -136,6 +129,42 @@ class PosController extends Controller {
             ]);
 
         return back()->withToastSuccess('Vat updated successfully!!');
+    }
+
+    public function sellingHistory() {
+        $data = Order::orderBy('id', 'desc');
+
+        if (request()->date_from && request()->date_to) {
+            $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
+        }
+
+        $data = $data->paginate(100);
+
+        return view('sell.selling-history', compact('data'));
+    }
+
+    public function nabilSell() {
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 1);
+
+        if (request()->date_from && request()->date_to) {
+            $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
+        }
+
+        $data = $data->paginate(100);
+
+        return view('sell.nabil-sell', compact('data'));
+    }
+
+    public function otherSell() {
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 2);
+
+        if (request()->date_from && request()->date_to) {
+            $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
+        }
+
+        $data = $data->paginate(100);
+
+        return view('sell.other-sell', compact('data'));
     }
 
 }

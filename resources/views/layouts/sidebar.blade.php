@@ -107,10 +107,21 @@
                         </a>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title link-nav" href="{{ route('sellingHistory') }}">
-                            <i class="ri-price-tag-3-line"></i>
-                            <span>Selling History</span>
+                        <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+                            <i class="ri-store-3-line"></i>
+                            <span>Sell</span>
                         </a>
+                        <ul class="sidebar-submenu">
+                            <li>
+                                <a href="{{ route('sellingHistory') }}">All</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('nabilSell') }}">Nabil Paribahan</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('otherSell') }}">Others</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

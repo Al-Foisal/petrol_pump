@@ -53,4 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/get-single-product-details/{id}', [AjaxRequestController::class, 'getSingleProductDetails']);
     Route::get('/invoice', [PosController::class, 'invoice'])->name('invoice');
     Route::get('/selling-history', [PosController::class, 'sellingHistory'])->name('sellingHistory');
+    Route::get('/nabil-sell', [PosController::class, 'nabilSell'])->name('nabilSell');
+    Route::get('/other-sell', [PosController::class, 'otherSell'])->name('otherSell');
 });
