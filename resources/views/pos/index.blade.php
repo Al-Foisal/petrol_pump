@@ -49,7 +49,7 @@
                                 <div class="mb-4 row align-items-center">
                                     <div class="row align-items-center">
                                         <label>Vehicle type</label>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-5">
                                             <div class="form-check user-checkbox ps-0">
                                                 <input class="checkbox_animated check-it" type="radio" value="1"
                                                     id="flexCheckDefault1" name="vehicle_type" checked>
@@ -57,13 +57,23 @@
                                                     Nabil Paribahan</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="form-check user-checkbox ps-0">
                                                 <input class="checkbox_animated check-it" type="radio" value="2"
                                                     id="flexCheckDefault2" name="vehicle_type">
                                                 <label class="form-label-title col-sm-6 mb-0" for="flexCheckDefault2">
                                                     Others</label>
                                             </div>
+                                        </div>
+                                        <div class="col-sm-4" id="group_id">
+                                            <select class="js-example-basic-single w-100" name="group_id">
+                                                <option>Select group</option>
+                                                @foreach ($groups as $n_item)
+                                                    <option value="{{ $n_item->id }}">
+                                                        {{ $n_item->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -114,15 +124,15 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-6">
                                         <label>Payable amount</label>
                                         <div>
                                             <input class="form-control" type="text" name="payable_amount"
                                                 id="payable_amount" value="0" readonly>
                                         </div>
                                     </div>
-                                    <div class="form-group mt-5">
-                                        <input class="btn btn-primary" type="submit" value="Create">
+                                    <div class="form-group mt-5 text-center">
+                                        <input class="btn btn-primary px-5 pe-5" style="letter-spacing: 3px;" type="submit" value="Sell">
                                     </div>
                                 </div>
                             </div>
@@ -135,10 +145,16 @@
 @endsection
 @section('js')
     <script type="text/javascript">
+        $("#group_id").hide();
         $(document).ready(function() {
             $('input[name="vehicle_type"]').on('change', function() {
                 var vehicle_type = $(this).val();
                 if (vehicle_type) {
+                    if (vehicle_type == 1) {
+                        $("#group_id").hide();
+                    } else {
+                        $("#group_id").show();
+                    }
                     $.ajax({
                         url: "{{ url('get-vehicle-details/') }}/" +
                             vehicle_type,

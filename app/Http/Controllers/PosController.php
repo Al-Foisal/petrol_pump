@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
@@ -70,7 +71,8 @@ class PosController extends Controller {
         $data['products'] = $products = Product::where('status', 1)
             ->orderBy('name', 'asc')
             ->get();
-        $data['nabil'] = Vehicle::where('vehicle_type', 1)->get();
+        $data['nabil']  = Vehicle::where('vehicle_type', 1)->get();
+        $data['groups'] = Group::all();
 
         return view('pos.index', $data);
     }
@@ -83,7 +85,7 @@ class PosController extends Controller {
             if ($product->stock > $request->product_quantity[$key]) {
                 continue;
             } else {
-                return back()->withToastError('Insufficient stock for - ' . $product->name);
+                return back()->withToastError('Insufficient stock for - ' . $product->name . ', stock - ' . $product->stock . ', input - ' . $request->product_quantity[$key]);
             }
 
         }
@@ -100,7 +102,14 @@ class PosController extends Controller {
 
         $vehicle      = Vehicle::find($request->vehicle_id);
         $vehicle_type = $vehicle->vehicle_type == 1 ? 'Nabil Paribahan' : 'Others';
-        $order        = Order::create([
+
+        if ($vehicle->vehicle_type == 1) {
+            $group_id = null;
+        } else {
+            $group_id = $vehicle->vehicle_type;
+        }
+
+        $order = Order::create([
             'invoice_no'                => $invoice,
             'vehicle_model'             => $vehicle->model,
             'vehicle_number'            => $vehicle->vehicle_number,
@@ -109,6 +118,7 @@ class PosController extends Controller {
             'vehicle_type'              => $vehicle_type,
             'total_amount'              => $request->total_amount,
             'payable_amount'            => $request->payable_amount,
+            'group_id'                  => $group_id,
         ]);
 
         foreach ($request->product_id as $key => $product_id) {
