@@ -223,7 +223,7 @@ class PosController extends Controller {
     }
 
     public function otherSell() {
-        $data = Order::orderBy('id', 'desc')->where('vehicle_type', '!==', 'Nabil Paribahan');
+        $data = Order::orderBy('id', 'desc')->where('vehicle_type', 'Others');
 
         if (request()->date_from && request()->date_to) {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
