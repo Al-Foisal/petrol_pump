@@ -37,6 +37,7 @@
                                         <th>Supervisor Name</th>
                                         <th>Supervisor Mobile</th>
                                         <th>Vehicle Type</th>
+                                        <th>Group</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -44,11 +45,12 @@
                                     @foreach ($vehicle as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->model }}</td>
+                                            <td>{{ $item->model ?? '--' }}</td>
                                             <td>{{ $item->vehicle_number }}</td>
-                                            <td>{{ $item->supervisor_name }}</td>
-                                            <td>{{ $item->supervisor_mobile }}</td>
+                                            <td>{{ $item->supervisor_name ?? '--' }}</td>
+                                            <td>{{ $item->supervisor_mobile ?? '--' }}</td>
                                             <td>{{ $item->vehicle_type == 1 ? 'Nabil Paribahan' : 'Others' }}</td>
+                                            <td>{{ $item->group->name ?? '--' }}</td>
                                             @if (!$item->type == 1)
                                                 <td>
 
@@ -77,6 +79,7 @@
                                                     </div>
                                                 </td>
                                             @endif
+
                                         </tr>
                                     @endforeach
                                 </tbody>

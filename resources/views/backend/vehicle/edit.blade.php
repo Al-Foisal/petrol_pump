@@ -34,3 +34,22 @@
         </div>
     </div>
 @endsection
+@section('js')
+    <script>
+        var gg = '{{ $vehicle->vehicle_type }}';
+        if(gg==1){
+            $("#group_id").hide();
+        }else{
+            $("#group_id").show();
+        }
+
+        function toggleGroup(e) {
+            console.log($(e).val());
+            if ($(e).val() == 2) {
+                $("#group_id").show();
+            } else {
+                $("#group_id").hide();
+            }
+        }
+    </script>
+@endsection
