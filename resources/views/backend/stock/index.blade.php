@@ -32,7 +32,7 @@
                                     <th>#</th>
                                     <th>Product</th>
                                     <th>Tank</th>
-                                    <th>Fuel Amount</th>
+                                    <th>Fuel Amount(L)</th>
                                     <th>Refile Date</th>
                                     <th>Vehicle Number</th>
                                     <th>Actions</th>

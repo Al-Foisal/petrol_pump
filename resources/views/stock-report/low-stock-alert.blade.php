@@ -21,7 +21,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Product Name</th>
-                                        <th>Present Fuel Amount</th>
+                                        <th>Present Fuel Amount(L)</th>
                                     </tr>
                                 </thead>
                                 <tbody>

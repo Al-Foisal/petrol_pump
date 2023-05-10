@@ -12,9 +12,9 @@
 
             <div class="col-md-10 offset-md-1">
                 <div class="card">
-                    <div class="card-header">Tank Wise Stock</div>
+                    <div class="card-header">Tank Wise Current Report</div>
                     <div class="card-body">
-                        <form action="{{ route('tankWiseStock') }}" method="get">
+                        {{-- <form action="{{ route('tankWiseStock') }}" method="get">
 
                             <div class=" row align-items-center">
                                 <div class="col-sm-3">
@@ -52,39 +52,36 @@
                         @if (request()->tank_id && request()->date_from && request()->date_to)
                             <div class="row mb-2">
                                 <div class="col-md-4">
-                                    @php
-                                        $tank=DB::table('tanks')->find(request()->tank_id);
-                                    @endphp
-                                    <b>Tank</b>: {{ $tank->name }}
+                                    <b>Tank</b>: {{ request()->tank_id }}
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <b>Date from</b>: {{ request()->date_from }}
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <b>Date to</b>: {{ request()->date_to }}
                                 </div>
-                                <div class="col-md-2">
-                                    <a href="{{ route('tankWiseStock') }}" class="btn btn-sm btn-primary">X</a>
-                                </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Tank Name</th>
-                                        <th>Refilled Date</th>
-                                        <th>Fuel Amount</th>
+                                        {{-- <th>Refilled Date</th> --}}
+                                        <th>Fuel Amount(L)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($data->count() > 0)
                                         @foreach ($data as $item)
+                                        {{-- @php
+                                            $fuel = DB::table('stocks')->where('tank_id',$item->id)->sum
+                                        @endphp --}}
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->tankInfo->name }}</td>
-                                                <td>{{ $item->date }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                {{-- <td>{{ $item->date }}</td> --}}
                                                 <td>{{ $item->oil_amount }}</td>
                                             </tr>
                                         @endforeach
@@ -102,9 +99,7 @@
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper">
-                                {{ $data->links() }}
-                            </div>
+                            
                         </div>
 
                     </div>

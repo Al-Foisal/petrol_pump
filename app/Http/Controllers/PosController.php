@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Product;
+use App\Models\Tank;
 use App\Models\Vat;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
@@ -202,5 +203,7 @@ class PosController extends Controller {
 
         return view('sell.other-sell', compact('data'));
     }
+
+    
 
 }

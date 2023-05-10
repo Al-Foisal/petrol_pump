@@ -67,6 +67,9 @@
                             <li>
                                 <a href="{{ route('lowStockAlert') }}">Low Stock Alert</a>
                             </li>
+                            {{-- <li>
+                                <a href="{{ route('currentStock') }}">Current Stock</a>
+                            </li> --}}
 
                         </ul>
                     </li>

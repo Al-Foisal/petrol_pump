@@ -138,6 +138,10 @@ class StockController extends Controller {
         return view('stock-report.low-stock-alert', compact('data'));
     }
 
-    
+    public function currentStock() {
+        $data = Tank::all();
+
+        return view('stock-report.current-stock', compact('data'));
+    }
 
 }
