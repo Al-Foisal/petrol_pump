@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('css')
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
 @endsection
 @section('content')
+    <a href="#" onclick="printJS('invoice-POS', 'html')">Print</a>
     <div id="invoice-POS">
 
         <center id="top">
@@ -18,8 +20,12 @@
             <div class="info">
                 <h2>Contact Info</h2>
                 <p>
-                    Name: {{ $order->vehicle_supervisor_name }}</br>
-                    Phone: {{ $order->vehicle_supervisor_mobile }}</br>
+                    @if ($order->vehicle_supervisor_name)
+                        Name: {{ $order->vehicle_supervisor_name }}</br>
+                    @endif
+                    @if ($order->vehicle_supervisor_mobile)
+                        Phone: {{ $order->vehicle_supervisor_mobile }}</br>
+                    @endif
                     Vehicle Number: {{ $order->vehicle_number }}</br>
                     Vehicle Type: {{ $order->vehicle_type }}</br>
                 </p>
@@ -82,4 +88,19 @@
         <!--End InvoiceBot-->
     </div>
     <!--End Invoice-->
+@endsection
+
+@section('js')
+    <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <script>
+        function printInfo(e) {
+            var prtContent = document.getElementById("invoice-POS");
+            var WinPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+            WinPrint.document.write(prtContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+            WinPrint.close();
+        }
+    </script>
 @endsection

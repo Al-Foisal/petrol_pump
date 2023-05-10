@@ -106,25 +106,19 @@
                                     </div>
                                 </div>
                                 <div class="mb-4 row align-items-center">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-6">
                                         <label>Total amount</label>
                                         <div>
                                             <input class="form-control" type="text" name="total_amount" id="total_amount"
                                                 value="0" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <label>Received amount</label>
+
+                                    <div class="col-sm-5">
+                                        <label>Payable amount</label>
                                         <div>
-                                            <input class="form-control" type="text" name="received_amount"
-                                                id="received_amount">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <label>Changes amount</label>
-                                        <div>
-                                            <input class="form-control" type="text" name="changes_amount"
-                                                id="changes_amount" value="0" readonly>
+                                            <input class="form-control" type="text" name="payable_amount"
+                                                id="payable_amount" value="0" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group mt-5">
@@ -161,6 +155,7 @@
                                         .vehicle_number + '(' + value.supervisor_name +
                                         ')</option>');
                             });
+                            getTotalSummation();
                         },
                     });
                 } else {
@@ -238,6 +233,12 @@
                 sumv1 += parseInt($(this).val());
             });
             $("#total_amount").val(sumv1.toFixed(2));
+            var vehicle_type = document.querySelector('input[name="vehicle_type"]:checked').value;
+            if (vehicle_type == 1) {
+                $("#payable_amount").val(0);
+            } else {
+                $("#payable_amount").val(sumv1.toFixed(2));
+            }
         }
         $("#received_amount").on("keyup", function() {
             var total_amount = Number($("#total_amount").val());

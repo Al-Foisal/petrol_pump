@@ -81,8 +81,7 @@ class PosController extends Controller {
             'vehicle_supervisor_mobile' => $vehicle->supervisor_mobile,
             'vehicle_type'              => $vehicle_type,
             'total_amount'              => $request->total_amount,
-            'received_amount'           => $request->received_amount,
-            'changes_amount'            => $request->changes_amount,
+            'payable_amount'            => $request->payable_amount,
         ]);
 
         foreach ($request->product_id as $key => $product_id) {
@@ -103,11 +102,11 @@ class PosController extends Controller {
 
         $data['order'] = $order;
 
-        return view('invoice', $data);
+        return to_route('invoice', $order);
     }
 
-    public function invoice() {
-        $order = Order::find(2);
+    public function invoice($id) {
+        $order = Order::find($id);
 
         return view('invoice', compact('order'));
     }

@@ -63,7 +63,8 @@
 
     @yield('css')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <link type="text/css" media="screen" rel="stylesheet" href="{{ asset('invoice.css') }}">
+    <link type="text/css" media="print" rel="stylesheet" href="{{ asset('invoice.css') }}">
 </head>
 
 <body>
