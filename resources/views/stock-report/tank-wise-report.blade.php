@@ -1,12 +1,18 @@
 @extends('layouts.app')
-
+@section('css')
+    <style>
+        span {
+            display: block;
+        }
+    </style>
+@endsection
 @section('content')
     <div class="container">
         <div class="row">
 
             <div class="col-md-10 offset-md-1">
                 <div class="card">
-                    <div class="card-header">Tank Stock Report</div>
+                    <div class="card-header">Tank Wise Stock</div>
                     <div class="card-body">
                         <form action="{{ route('tankWiseStock') }}" method="get">
 
@@ -43,6 +49,19 @@
                         </form>
 
                         <hr />
+                        @if (request()->tank_id && request()->date_from && request()->date_to)
+                            <div class="row mb-2">
+                                <div class="col-md-4">
+                                    <b>Tank</b>: {{ request()->tank_id }}
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Date from</b>: {{ request()->date_from }}
+                                </div>
+                                <div class="col-md-4">
+                                    <b>Date to</b>: {{ request()->date_to }}
+                                </div>
+                            </div>
+                        @endif
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -54,14 +73,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $item)
+                                    @if ($data->count() > 0)
+                                        @foreach ($data as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->tankInfo->name }}</td>
+                                                <td>{{ $item->date }}</td>
+                                                <td>{{ $item->oil_amount }}</td>
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->tankInfo->name }}</td>
-                                            <td>{{ $item->date }}</td>
-                                            <td>{{ $item->oil_amount }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <div class="text-center">
+                                                    <p>No data found!</p>
+                                                </div>
+                                            </td>
+                                            <td></td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                             <div class="pagination-wrapper">
