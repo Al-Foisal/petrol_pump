@@ -157,28 +157,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (request()->company_name || request()->product_id || (request()->date_from && request()->date_to))
-                                        @php
-                                            $total_amount = 0;
-                                            $total_quantity = 0;
-                                            $total_vehicle = 0;
-                                            foreach ($data as $a_item) {
-                                                if ($a_item->orderDetails->count() > 0) {
-                                                    $total_amount += $a_item->total_amount;
-                                                    $total_vehicle++;
-                                                    foreach ($a_item->orderDetails as $a_d) {
-                                                        $total_quantity += $a_d->product_quantity;
-                                                    }
-                                                }
-                                            }
-                                        @endphp
-                                        <td>Total vehicle</td>
-                                        <td>{{ $total_vehicle }}</td>
-                                        <td>Total amount</td>
-                                        <td>৳{{ $total_amount }}</td>
-                                        <td>Total quantity</td>
-                                        <td>{{ $total_quantity }} L</td>
-                                    @endif
+                                    
                                     @if ($data->count() > 0)
                                         @foreach ($data as $item)
                                             @if ($item->orderDetails->count() > 0)
