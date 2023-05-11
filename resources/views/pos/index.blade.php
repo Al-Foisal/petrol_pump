@@ -22,11 +22,11 @@
                             @foreach ($products as $item)
                                 <div class="col-sm-4" onclick="getProductDetails(this,'{{ $item->id }}')">
                                     <div class="product_box_section">
-                                        <div class="product_image_section">
-                                            <img class="product_pos_img" src="{{ asset($item->image) }}" alt="">
+                                        <div class="product_image_section" style="text-align: center;padding: 1rem;">
+                                            <img class="product_pos_img" src="{{ asset($item->image) }}" style="height: 8rem;">
                                         </div>
-                                        <div class="product_info">
-                                            <p class="product_name">{{ $item->name }}</p>
+                                        <div class="product_info" style="text-align: center;padding-bottom: 1rem;">
+                                            <p class="product_name"><b>{{ $item->name }}</b></p>
                                             <p class="product_price">{{ $item->price }} TK</p>
                                         </div>
                                     </div>
