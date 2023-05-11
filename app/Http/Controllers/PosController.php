@@ -106,7 +106,7 @@ class PosController extends Controller {
         if ($vehicle->vehicle_type == 1) {
             $group_id = null;
         } else {
-            $group_id = $vehicle->group_id;
+            $group_id = $request->group_id;
         }
 
         $order = Order::create([
@@ -119,6 +119,7 @@ class PosController extends Controller {
             'total_amount'              => $request->total_amount,
             'payable_amount'            => $request->payable_amount,
             'group_id'                  => $group_id,
+            'vat_amount'                => $request->vat_amount,
         ]);
 
         foreach ($request->product_id as $key => $product_id) {
@@ -178,6 +179,10 @@ class PosController extends Controller {
             $data = $data->orWhere('vehicle_type', request()->company_name)->orWhere('group_id', request()->company_name);
         }
 
+        if (request()->vehicle_type) {
+            $data = $data->where('vehicle_number', request()->vehicle_type);
+        }
+
         if (request()->product_id) {
             $p_id = request()->product_id;
             $data = $data->with([
@@ -193,8 +198,9 @@ class PosController extends Controller {
 
         $group   = Group::all();
         $product = Product::all();
+        $vehicle = Vehicle::all();
 
-        return view('sell.selling-history', compact('data', 'group', 'product'));
+        return view('sell.selling-history', compact('data', 'group', 'product', 'vehicle'));
     }
 
     public function nabilSell() {
@@ -202,6 +208,10 @@ class PosController extends Controller {
 
         if (request()->date_from && request()->date_to) {
             $data = $data->whereDate('created_at', '>=', request()->date_from)->whereDate('created_at', '<=', request()->date_to);
+        }
+
+        if (request()->vehicle_type) {
+            $data = $data->where('vehicle_number', request()->vehicle_type);
         }
 
         if (request()->product_id) {
@@ -218,8 +228,9 @@ class PosController extends Controller {
         }
 
         $product = Product::all();
+        $vehicle = Vehicle::where('vehicle_type', 1)->get();
 
-        return view('sell.nabil-sell', compact('data', 'product'));
+        return view('sell.nabil-sell', compact('data', 'product', 'vehicle'));
     }
 
     public function otherSell() {
@@ -234,7 +245,9 @@ class PosController extends Controller {
 
         }
 
-// dd(request()->product_id);
+        if (request()->vehicle_type) {
+            $data = $data->where('vehicle_number', request()->vehicle_type);
+        }
 
         if (request()->product_id) {
             $p_id = request()->product_id;
@@ -251,8 +264,9 @@ class PosController extends Controller {
 
         $group   = Group::all();
         $product = Product::all();
+        $vehicle = Vehicle::where('vehicle_type', 2)->get();
 
-        return view('sell.other-sell', compact('data', 'group', 'product'));
+        return view('sell.other-sell', compact('data', 'group', 'product', 'vehicle'));
     }
 
 }

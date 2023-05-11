@@ -57,7 +57,7 @@
                                 <p class="itemtext">{{ $details->product_quantity }}</p>
                             </td>
                             <td class="tableitem">
-                                <p class="itemtext">${{ number_format($details->product_amount, 2) }}</p>
+                                <p class="itemtext">৳{{ number_format($details->product_amount, 2) }}</p>
                             </td>
                         </tr>
                     @endforeach
@@ -66,10 +66,12 @@
                     <tr class="tabletitle">
                         <td></td>
                         <td class="Rate">
+                            <h2>Vat</h2>
                             <h2>Total</h2>
                         </td>
                         <td class="payment">
-                            <h2>${{ number_format($order->total_amount, 2) }}</h2>
+                            <h2>৳{{ number_format($order->vat_amount, 2) }}</h2>
+                            <h2>৳{{ number_format($order->total_amount, 2) }}</h2>
                         </td>
                     </tr>
 

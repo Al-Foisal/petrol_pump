@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Vat;
 use App\Models\Vehicle;
 
 class AjaxRequestController extends Controller {
@@ -25,5 +26,11 @@ class AjaxRequestController extends Controller {
         $single_product = Product::find($id);
 
         return $single_product;
+    }
+
+    public function getVat() {
+        $vat = Vat::where('status', 1)->where('id', 1)->first();
+
+        return $vat;
     }
 }

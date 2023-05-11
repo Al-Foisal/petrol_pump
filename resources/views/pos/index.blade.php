@@ -116,6 +116,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-4 row align-items-center">
+                                    <input type="hidden" name="vat_amount" id="vat_amount">
                                     <div class="col-sm-6">
                                         <label>Total amount</label>
                                         <div>
@@ -132,7 +133,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group mt-5 text-center">
-                                        <input class="btn btn-primary px-5 pe-5" style="letter-spacing: 3px;" type="submit" value="Sell">
+                                        <input class="btn btn-primary px-5 pe-5" style="letter-spacing: 3px;" type="submit"
+                                            value="Sell">
                                     </div>
                                 </div>
                             </div>
@@ -246,15 +248,58 @@
         function getTotalSummation() {
             var sumv1 = 0;
             $(".amount").bind().each(function(index, obj) {
-                sumv1 += parseInt($(this).val());
+                sumv1 += Number($(this).val());
             });
-            $("#total_amount").val(sumv1.toFixed(2));
-            var vehicle_type = document.querySelector('input[name="vehicle_type"]:checked').value;
-            if (vehicle_type == 1) {
-                $("#payable_amount").val(0);
+
+            var type = document.querySelector('input[name="vehicle_type"]:checked').value;
+            console.log(type);
+            if (type == '2') {
+
+                var vat = 0;
+                var vat_amount = 0;
+                var total_vat = 0;
+                $.ajax({
+                    url: "{{ url('get-vat') }}",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data) {
+                        vat = Number(data.vat);
+                        vat_amount = Number((sumv1 * vat) / 100);
+                        $("#vat_amount").val(vat_amount);
+                        if (vat) {
+                            total_vat = sumv1 + Number((sumv1 * vat) / 100);
+
+                            $("#total_amount").val(total_vat.toFixed(2));
+                            var vehicle_type = document.querySelector('input[name="vehicle_type"]:checked')
+                                .value;
+                            if (vehicle_type == 1) {
+                                $("#payable_amount").val(0);
+                            } else {
+                                $("#payable_amount").val(total_vat.toFixed(2));
+                            }
+                        } else {
+                            $("#total_amount").val(sumv1.toFixed(2));
+                            var vehicle_type = document.querySelector('input[name="vehicle_type"]:checked')
+                                .value;
+                            if (vehicle_type == 1) {
+                                $("#payable_amount").val(0);
+                            } else {
+                                $("#payable_amount").val(sumv1.toFixed(2));
+                            }
+                        }
+
+                    },
+                });
             } else {
-                $("#payable_amount").val(sumv1.toFixed(2));
+                $("#total_amount").val(sumv1.toFixed(2));
+                var vehicle_type = document.querySelector('input[name="vehicle_type"]:checked').value;
+                if (vehicle_type == 1) {
+                    $("#payable_amount").val(0);
+                } else {
+                    $("#payable_amount").val(sumv1.toFixed(2));
+                }
             }
+
         }
         $("#received_amount").on("keyup", function() {
             var total_amount = Number($("#total_amount").val());

@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/get-vehicle-details/{vehicle_type}', [AjaxRequestController::class, 'getVehicleDetails']);
     Route::get('/get-product-details/{id}', [AjaxRequestController::class, 'getProductDetails']);
     Route::get('/get-single-product-details/{id}', [AjaxRequestController::class, 'getSingleProductDetails']);
+    Route::get('/get-vat', [AjaxRequestController::class, 'getVat']);
     Route::get('/invoice/{id}', [PosController::class, 'invoice'])->name('invoice');
     Route::get('/selling-history', [PosController::class, 'sellingHistory'])->name('sellingHistory');
     Route::get('/nabil-sell', [PosController::class, 'nabilSell'])->name('nabilSell');

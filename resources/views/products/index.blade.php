@@ -6,11 +6,11 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    @if ($message = Session::get('success'))
+                    {{-- @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
                         </div>
-                    @endif
+                    @endif --}}
                     <div class="card-header">
                         <div class="pull-left">
                             <h2>Products</h2>
@@ -28,7 +28,7 @@
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Unit Price</th>
-                                <th>Fuel Amount</th>
+                                <th>Fuel Amount(L)</th>
                                 <th>Status</th>
                                 <th width="280px">Action</th>
                             </tr>
@@ -39,7 +39,7 @@
                                         <img style="width: 50px;" src="{{ asset($product->image) }}" alt="">
                                     </td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->price }}</td>
+                                    <td>৳{{ $product->price }}</td>
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->status == 1 ? 'Active' : 'Inactive' }}</td>
                                     <td>
