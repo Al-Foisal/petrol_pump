@@ -81,7 +81,10 @@
                         </form>
 
                         <hr />
-                        @if (request()->company_name || request()->product_id || (request()->date_from && request()->date_to))
+                        @if (request()->company_name ||
+                                request()->vehicle_type ||
+                                request()->product_id ||
+                                (request()->date_from && request()->date_to))
                             <div class="row mb-2">
                                 @if (request()->company_name)
                                     <div class="col-md-2 mt-2">
@@ -138,7 +141,7 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <a href="{{ route('sellingHistory') }}" class="btn btn-sm btn-primary">Clear</a>
+                                    <a href="{{ route('otherSell') }}" class="btn btn-sm btn-primary">Clear</a>
                                 </div>
                             </div>
                         @endif

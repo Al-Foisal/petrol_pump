@@ -67,7 +67,7 @@
                         </form>
 
                         <hr />
-                        @if (request()->product_id || (request()->date_from && request()->date_to))
+                        @if (request()->product_id || request()->vehicle_type || (request()->date_from && request()->date_to))
                             <div class="row mb-2">
                                 @if (request()->product_id)
                                     @php
@@ -118,7 +118,7 @@
                             </div>
                             <div class="row mb-2">
                                 <div class="col-md-2">
-                                    <a href="{{ route('sellingHistory') }}" class="btn btn-sm btn-primary">Clear</a>
+                                    <a href="{{ route('nabilSell') }}" class="btn btn-sm btn-primary">Clear</a>
                                 </div>
                             </div>
                         @endif
