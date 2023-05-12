@@ -19,7 +19,7 @@
                             <div class=" row align-items-center">
                                 <div class="col-sm-3">
                                     <label>Tank Name</label>
-                                    <select class="js-example-basic-single w-100" name="tank_id" required>
+                                    <select class="js-example-basic-single w-100" name="tank_id">
                                         @foreach ($tanks as $s_tank)
                                             <option value="{{ $s_tank->id }}">
                                                 {{ $s_tank->name }}
@@ -30,14 +30,13 @@
                                 <div class="col-sm-3">
                                     <label>Date From</label>
                                     <div>
-                                        <input class="form-control" type="date" name="date_from" required>
+                                        <input class="form-control" type="date" name="date_from">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Date To</label>
                                     <div>
-                                        <input class="form-control" type="date" name="date_to" id="changes_amount"
-                                            required>
+                                        <input class="form-control" type="date" name="date_to" id="changes_amount">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -49,22 +48,26 @@
                         </form>
 
                         <hr />
-                        @if (request()->tank_id && request()->date_from && request()->date_to)
+                        @if (request()->tank_id || (request()->date_from && request()->date_to))
                             <div class="row mb-2">
-                                <div class="col-md-4">
-                                    @php
-                                        $tank=DB::table('tanks')->find(request()->tank_id);
-                                    @endphp
-                                    <b>Tank</b>: {{ $tank->name }}
-                                </div>
-                                <div class="col-md-3">
-                                    <b>Date from</b>: {{ request()->date_from }}
-                                </div>
-                                <div class="col-md-3">
-                                    <b>Date to</b>: {{ request()->date_to }}
-                                </div>
+                                @if (request()->tank_id)
+                                    <div class="col-md-4">
+                                        @php
+                                            $tank = DB::table('tanks')->find(request()->tank_id);
+                                        @endphp
+                                        <b>Tank</b>: {{ $tank->name }}
+                                    </div>
+                                @endif
+                                @if (request()->date_from && request()->date_to)
+                                    <div class="col-md-3">
+                                        <b>Date from</b>: {{ request()->date_from }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>Date to</b>: {{ request()->date_to }}
+                                    </div>
+                                @endif
                                 <div class="col-md-2">
-                                    <a href="{{ route('tankWiseStock') }}" class="btn btn-sm btn-primary">X</a>
+                                    <a href="{{ route('tankWiseStock') }}" class="btn btn-sm btn-primary">clear</a>
                                 </div>
                             </div>
                         @endif

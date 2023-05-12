@@ -116,13 +116,16 @@ class StockController extends Controller {
     }
 
     public function tankWiseStock() {
-
+        // dd(request()->all());
         $data = Stock::orderBy('id', 'desc');
 
-        if (request()->tank_id && request()->date_from && request()->date_to) {
-            $data = $data->where('tank_id', request()->tank_id)
-                ->where('date', '>=', request()->date_from)
-                ->where('date', '<=', request()->date_to);
+        if (request()->tank_id) {
+            $data = $data->where('tank_id', request()->tank_id);
+        }
+
+        if (request()->date_from != null && request()->date_to != null) {
+            $data = $data->whereDate('date', '>=', request()->date_from)
+                ->whereDate('date', '<=', request()->date_to);
         }
 
         $data = $data->paginate(100);
