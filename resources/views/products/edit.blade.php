@@ -51,8 +51,14 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Price:</strong>
+                                    <strong>Unit price:</strong>
                                     <input type="number" name="price" class="form-control" placeholder="Name" value="{{ $product->price }}">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Stock:</strong>
+                                    <input type="text" name="stock" class="form-control" placeholder="123" value="{{ $product->stock }}">
                                 </div>
                             </div>
 

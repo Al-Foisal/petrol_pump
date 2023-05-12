@@ -49,8 +49,14 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Price:</strong>
+                                    <strong>Unit price:</strong>
                                     <input type="number" step="any" name="price" class="form-control" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Stock(L):</strong>
+                                    <input type="text" step="any" name="stock" class="form-control" placeholder="123">
                                 </div>
                             </div>
 

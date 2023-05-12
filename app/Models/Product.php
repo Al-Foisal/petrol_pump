@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
-{
+class Product extends Model {
     use HasFactory;
 
     /**
@@ -14,12 +13,9 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'image', 'price', 'status'
-    ];
+    protected $guarded = [];
 
-    public function stockInfo()
-    {
+    public function stockInfo() {
         return $this->hasOne(Stock::class, 'product_id', 'id');
     }
 }
